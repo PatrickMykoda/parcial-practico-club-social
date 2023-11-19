@@ -13,7 +13,7 @@ import { ClubSocioModule } from './club-socio/club-socio.module';
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'localhost',
-      port: 5430,
+      port: 5432,
       username: 'postgres',
       password: 'postgres',
       database: 'club-social',
