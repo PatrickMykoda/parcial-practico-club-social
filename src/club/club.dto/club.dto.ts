@@ -5,9 +5,9 @@ export class ClubDto {
     @IsNotEmpty()
     readonly nombre: string;
 
-    @IsDate()
+    @IsString()
     @IsNotEmpty()
-    readonly fecha_fundacion: Date;
+    readonly fecha_fundacion: string;
     
     @IsString()
     @IsNotEmpty()

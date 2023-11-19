@@ -5,11 +5,11 @@ export class SocioDto {
     @IsNotEmpty()
     readonly usuario: string;
 
-    @IsDate()
+    @IsString()
     @IsNotEmpty()
-    readonly fecha_nacimiento: Date;
+    readonly fecha_nacimiento: string;
     
-    @IsEmail()
+    @IsString()
     @IsNotEmpty()
     readonly email: string;
 }

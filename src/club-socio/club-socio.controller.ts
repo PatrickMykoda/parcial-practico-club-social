@@ -20,7 +20,7 @@ export class ClubSocioController {
        return await this.clubSocioService.findSocioByClubIdSocioId(clubId, socioId);
     }
 
-    @Get(':clubId/artworks')
+    @Get(':clubId/members')
     async findMembersFromClub(@Param('clubId') clubId: string){
        return await this.clubSocioService.findSociosByClubId(clubId);
     }

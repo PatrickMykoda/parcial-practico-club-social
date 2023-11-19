@@ -4,6 +4,7 @@ import { BusinessErrorsInterceptor } from '../shared/interceptors/business-error
 import { SocioDto } from './socio.dto/socio.dto';
 import { SocioEntity } from './socio.entity/socio.entity';
 import { plainToInstance } from 'class-transformer';
+import { BusinessError, BusinessLogicException } from '../shared/errors/business-errors';
 
 @Controller('members')
 @UseInterceptors(BusinessErrorsInterceptor)
@@ -22,12 +23,18 @@ export class SocioController {
 
     @Post()
     async create(@Body() socioDto: SocioDto) {
+        var regex = /^(17|18|19|20)\d{2}-(0[1-9]|1[1,2])-(0[1-9]|[12][0-9]|3[01])$/g;
+        if (!regex.test(socioDto["fecha_nacimiento"]))
+            throw new BusinessLogicException("Fecha incorrecta: Se requiere el formato yyyy-mm-dd", BusinessError.PRECONDITION_FAILED);
         const socio: SocioEntity = plainToInstance(SocioEntity, socioDto);
         return await this.socioService.create(socio);
     }
 
     @Put(':memberId')
     async update(@Param('memberId') socioId: string, @Body() socioDto: SocioDto) {
+        var regex = /^(17|18|19|20)\d{2}-(0[1-9]|1[1,2])-(0[1-9]|[12][0-9]|3[01])$/g;
+        if (!regex.test(socioDto["fecha_nacimiento"]))
+            throw new BusinessLogicException("Fecha incorrecta: Se requiere el formato yyyy-mm-dd", BusinessError.PRECONDITION_FAILED);
         const socio: SocioEntity = plainToInstance(SocioEntity, socioDto);
         return await this.socioService.update(socioId, socio);
     }
